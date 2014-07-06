@@ -1,0 +1,2 @@
+include *.rst
+include canque/templates/*.txt

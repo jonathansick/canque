@@ -1,0 +1,26 @@
+Universe   = vanilla
+Executable = {{ script_path }}
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+RunAsOwner = True
+getenv = {{ getenv }}
+transfer_output_files = /dev/null
+# Run-environment requirements
+Requirements = VMType =?= "{{ vmname }}" && \
+    Arch == "x86_64" && \
+    Memory >= {{ memory }} && \
+    Cpus >=  {{ cpus }}
+# VM requirements
++VMLoc="http://www.canfar.phys.uvic.ca/data/pub/vospace/{{ user }}/vmstore/{{ vmname }}.img.gz"
++VMName        = "{{ vmname }}"
++VMMem         = "{{ vmmem }}"
++VMCPUCores    = "{{ cpus }}"
++VMStorage     = "{{ vmstorage }}"
+{% for job in jobs %}
+
+Arguments = {{ job.args }}
+Log = {{ job.logpath }}
+Output = {{ job.outpath }}
+Error = {{ job.errpath }}
+Queue
+{% endfor %}
