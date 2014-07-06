@@ -8,7 +8,7 @@ setup(
     name="canque",
     version="0.1",
     packages=["canque"],
-    # metadata for upload to PyPI
+    install_requires=['Jinja2'],
     author="Jonathan Sick",
     author_email="jonathansick@mac.com",
     description="Make CANFAR queue submission files.",
