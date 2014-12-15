@@ -11,24 +11,14 @@ from jinja2 import Environment, PackageLoader
 
 class Submission(object):
     """Represents a submission file."""
-    def __init__(self, vmname, script_path, user="jonathansick",
-                 memory=2048, cpus=1, getenv=False,
+    def __init__(self, user, vmname, script_path,
                  vmmem=None, vmstorage=25):
         super(Submission, self).__init__()
         self._env = Environment(loader=PackageLoader('canque', 'templates'))
         self._args = {'vmname': vmname,
                       'script_path': script_path,
                       'user': user,
-                      'memory': str(memory),
-                      'cpus': str(cpus),
-                      'getenv': str(getenv),
                       'jobs': []}
-        if vmmem is None:
-            # Boost requested memory to get around CANFAR issue
-            self._args['vmmem'] = str(int(1.76 * int(memory)))
-        else:
-            self._args['vmmem'] = str(memory)
-        self._args['vmstorage'] = str(vmstorage)
 
     def add_job(self, argstr, logpath, outpath=None, errpath=None):
         """Add a job to the submission queue."""
