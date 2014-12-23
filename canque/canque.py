@@ -11,12 +11,10 @@ from jinja2 import Environment, PackageLoader
 
 class Submission(object):
     """Represents a submission file."""
-    def __init__(self, user, vmname, script_path,
-                 vmmem=None, vmstorage=25):
+    def __init__(self, user, script_path):
         super(Submission, self).__init__()
         self._env = Environment(loader=PackageLoader('canque', 'templates'))
-        self._args = {'vmname': vmname,
-                      'script_path': script_path,
+        self._args = {'script_path': script_path,
                       'user': user,
                       'jobs': []}
 
