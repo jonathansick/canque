@@ -2,15 +2,16 @@ Universe   = vanilla
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT_OR_EVICT
 RunAsOwner = True
-environment = "HOME=/home/{{ user }}"
+
 transfer_output_files = /dev/null
+
 Executable = {{ script_path }}
 
 {% for job in jobs %}
 
-Arguments = {{ job.args }}
-Log = {{ job.logpath }}
-Output = {{ job.outpath }}
-Error = {{ job.errpath }}
-Queue
+arguments = {{ job.args }}
+log       = {{ job.logpath }}
+output    = {{ job.outpath }}
+error     = {{ job.errpath }}
+queue
 {% endfor %}
